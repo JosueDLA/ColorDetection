@@ -18,7 +18,7 @@ ORANGE = {
     "upper": [20, 255, 255]
 }
 
-PURPLE = {
+PURPLE: {
     "lower": [35, 60, 0],
     "upper": [45, 255, 255]
 }
