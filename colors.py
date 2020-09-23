@@ -1,6 +1,6 @@
 BLACK = {
     "lower": [0, 0, 0],
-    "upper": [180, 255, 30]
+    "upper": [179, 255, 30]
 }
 
 BLUE = {
@@ -23,9 +23,14 @@ PURPLE: {
     "upper": [45, 255, 255]
 }
 
-RED = {
+LIGHT_RED = {
     "lower": [0, 50, 120],
     "upper": [10, 255, 255]
+}
+
+DARK_RED = {
+    "lower": [160, 100, 100],
+    "upper": [179, 255, 255]
 }
 
 YELLOW = {
@@ -35,5 +40,5 @@ YELLOW = {
 
 WHITE = {
     "lower": [0, 0, 200],
-    "upper": [180, 255, 255]
+    "upper": [179, 255, 255]
 }
