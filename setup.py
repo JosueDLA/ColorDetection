@@ -1,6 +1,5 @@
 from color_detection.detect import Mask, detect
 import numpy as np
-import colorsys
 import colors
 import cv2
 

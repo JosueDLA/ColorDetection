@@ -1,3 +1,4 @@
+from colorthief import ColorThief
 import numpy as np
 import colorsys
 import cv2
@@ -30,5 +31,8 @@ def detect(frame, masks, color_threshold=0.10):
     return color
 
 
-def detect_dominant(frame):
-    pass
+def detect_dominant(image):
+    color_thief = ColorThief(image)
+    dominant_color = color_thief.get_color(quality=1)
+
+    return dominant_color
