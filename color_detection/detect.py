@@ -1,7 +1,9 @@
 from colorthief import ColorThief
+from PIL import Image
 import numpy as np
 import colorsys
 import cv2
+import io
 
 
 class Mask:
@@ -18,7 +20,7 @@ class Mask:
         return lower_rgb, upper_rgb
 
 
-def detect(frame, masks, color_threshold=0.10):
+def detect(frame, masks):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     for mask in masks:
@@ -28,11 +30,28 @@ def detect(frame, masks, color_threshold=0.10):
         if(np.count_nonzero(temporal_mask) != 0):
             color = mask
             break
+
     return color
 
 
-def detect_dominant(image):
-    color_thief = ColorThief(image)
+def detect_dominant(frame):
+    """
+    Takes a frame and returns the domint color. 
+    """
+
+    # Frame to image
+    image = Image.fromarray(frame)
+
+    # Image to file
+    byte_object = io.BytesIO()
+    image.save(byte_object, "JPEG")
+
+    print("----------------------------")
+    print(type(image))
+    print(type(frame))
+    print(type(byte_object))
+
+    color_thief = ColorThief(byte_object)
     dominant_color = color_thief.get_color(quality=1)
 
     return dominant_color
