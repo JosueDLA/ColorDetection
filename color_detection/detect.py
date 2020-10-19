@@ -20,8 +20,17 @@ class Mask:
         return lower_rgb, upper_rgb
 
 
-def detect(frame, masks):
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+def detect(rgb_color, masks):
+    """
+    Takes a rgb value and a list of masks, returns the mask of the detected color.
+    """
+    # Create image
+    pil_image = Image.new('RGB', (1, 1), color=rgb_color)
+
+    # PIL Image to np.array
+    color = np.array(pil_image)
+
+    hsv = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
 
     for mask in masks:
         temporal_mask = cv2.inRange(hsv, np.array(mask.color_lower),
@@ -45,11 +54,6 @@ def detect_dominant(frame):
     # Image to file
     byte_object = io.BytesIO()
     image.save(byte_object, "JPEG")
-
-    print("----------------------------")
-    print(type(image))
-    print(type(frame))
-    print(type(byte_object))
 
     color_thief = ColorThief(byte_object)
     dominant_color = color_thief.get_color(quality=1)
