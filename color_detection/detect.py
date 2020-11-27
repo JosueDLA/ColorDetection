@@ -1,3 +1,4 @@
+from __future__ import annotations
 from colorthief import ColorThief
 from PIL import Image
 import numpy as np
@@ -5,31 +6,32 @@ import colorsys
 import cv2
 import io
 
-"""
-color_detection
-
-Detect dominant color of a OpenCV frame.
-"""
+"""Detect dominant color of a OpenCV frame."""
 
 
 class Mask:
-    """
-    Color Detection main class.
-    """
+    """Mask main class."""
 
-    def __init__(self, name, color_lower, color_upper):
-        """
-        Create a new color mask.
+    def __init__(self, name: str, color_lower: list, color_upper: list):
+        """Create a new color mask.
 
-        :param name: the name of the color.
-        :param color_lower: hsv lower boundry.
-        :param color_upper: hsv upper boundry.
+        Args:
+            name (str): the name of the color.
+            color_lower (list): hsv lower boundry.
+            color_upper (list): hsv upper boundry.
         """
         self.name = name
         self.color_lower = color_lower
         self.color_upper = color_upper
 
-    def get_RGB(self):
+    @property
+    def get_RGB(self) -> tuple:
+        """Get RGB value of Mask
+
+        Returns:
+            tuple: rgb lower boundry.
+            tuple: rgb lower boundry.
+        """
         lower_rgb = colorsys.hsv_to_rgb(
             self.color_lower[0], self.color_lower[1], self.color_lower[2])
         upper_rgb = colorsys.hsv_to_rgb(
@@ -37,14 +39,15 @@ class Mask:
         return lower_rgb, upper_rgb
 
     @staticmethod
-    def detect(rgb_color, masks):
-        """
-        Detect color.
+    def detect(rgb_color: tuple, masks: list) -> Mask:
+        """Detect color.
 
-        :param rgb_color: (r, g, b) color to detect.
-        :param masks: list of colors (Masks).
-        :return Mask: detected Mask color.
+        Args:
+            rgb_color: rgb color to detect.
+            masks: list of colors (Masks).
 
+        Returns:
+            Mask: detected Mask color.
         """
         # Create image
         pil_image = Image.new('RGB', (1, 1), color=rgb_color)
@@ -68,12 +71,14 @@ class Mask:
         return color
 
     @staticmethod
-    def detect_dominant(frame):
-        """
-        Detect dominant color of a OpenCV frame (nparray).
+    def detect_dominant(frame: np.ndarray) -> tuple:
+        """Detect dominant color of a OpenCV frame.
 
-        :param frame: OpenCV frame.
-        :return tuple: (r, g, b).
+        Args:
+            frame (np.ndarray): OpenCV frame.
+
+        Returns:
+            tuple: rgb dominant color.
         """
 
         # Frame to image
