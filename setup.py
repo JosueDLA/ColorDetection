@@ -15,10 +15,10 @@ setup(
     license='MIT',
     packages=find_packages(exclude=["colors.py"]),
     install_requires=[
-        "numpy==1.21.4",
-        "opencv-python==4.5.4.60",
+        "numpy==1.22.3",
+        "opencv-python==4.5.5.64",
         "colorthief==0.2.1",
-        "pillow==8.4.0",
+        "pillow==9.1.0",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
