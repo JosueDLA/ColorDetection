@@ -4,7 +4,7 @@ from pathlib import Path
 
 setup(
     name="color-detection-jdla",
-    version="0.0.2",
+    version="0.0.3",
     py_modules=["color_detection"],
     description="Color Detection using OpenCV",
     long_description_content_type="text/markdown",
